@@ -19,7 +19,7 @@ public class FizzBuzz {
     }
 
     private String toFizzBuzz(int number, Stream<Supplier<String>> rules) {
-        String result = rules.map(Supplier::get).collect(Collectors.joining());
+        String result = rules.reduce("", (fizzBuzzString, rule) -> fizzBuzzString += rule.get(), (a, b) -> a + b );
         if (result.isEmpty()) {
             return Integer.toString(number);
         }
