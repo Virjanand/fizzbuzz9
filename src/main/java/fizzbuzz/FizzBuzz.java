@@ -27,20 +27,6 @@ public class FizzBuzz {
         return IntStream.rangeClosed(from, until).mapToObj(number -> toFizzBuzz(number, new FizzBuzzRules().getRules(number))).collect(Collectors.toList());
     }
 
-    private Stream<Supplier<String>> getRules(int number) {
-        return Stream.of(() -> {
-            if (number % 3 == 0) {
-                return "Fizz";
-            }
-            return "";
-        }, () -> {
-            if (number % 5 == 0) {
-                return "Buzz";
-            }
-            return "";
-        });
-    }
-
     private String toFizzBuzz(int number, Stream<Supplier<String>> rules) {
         String result = rules.map(Supplier::get).collect(Collectors.joining());
         if (result.isEmpty()) {
