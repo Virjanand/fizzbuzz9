@@ -8,7 +8,11 @@ import java.util.stream.Stream;
 
 public class FizzBuzz {
     public List<String> getNumbers(int from, int until) {
-        return IntStream.rangeClosed(from, until).mapToObj(number -> toFizzBuzz(number, Stream.of(() -> {
+        return IntStream.rangeClosed(from, until).mapToObj(number -> toFizzBuzz(number, getRules(number))).collect(Collectors.toList());
+    }
+
+    private Stream<Supplier<String>> getRules(int number) {
+        return Stream.of(() -> {
             if (number % 3 == 0) {
                 return "Fizz";
             }
@@ -18,7 +22,7 @@ public class FizzBuzz {
                 return "Buzz";
             }
             return "";
-        }))).collect(Collectors.toList());
+        });
     }
 
     private String toFizzBuzz(int number, Stream<Supplier<String>> rules) {
