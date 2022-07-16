@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class FizzBuzz {
     public List<String> getNumbers(int from, int until) {
@@ -21,8 +22,7 @@ public class FizzBuzz {
     }
 
     private String toFizzBuzz(int number, Supplier<String> fizzRule, Supplier<String> buzzRule) {
-        String result = fizzRule.get();
-        result += buzzRule.get();
+        String result = Stream.of(fizzRule, buzzRule).map(Supplier::get).collect(Collectors.joining());
         if (result.isEmpty()) {
             return Integer.toString(number);
         }
